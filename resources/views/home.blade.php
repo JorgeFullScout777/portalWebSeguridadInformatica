@@ -19,35 +19,48 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+            <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
     </head>
     <body class="antialiased">
-
-    <h2>Iniciar sesion</h2>
-    <form action="{{ route('login') }}" method="POST">
-    @csrf
-        <label for="email">Correo:</label>
-        <input type="text" id="email" name="email" required>
-        <br>
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Iniciar Sesión">
-    </form>
-
-    <h2>Registro</h2>
-    <form action="{{ route('register') }}" method="POST">
-    @csrf
-        <label for="registerUsername">Nombre:</label>
-        <input type="text" id="registerUsername" name="registerUsername" required>
-        <br>
-        <label for="registerEmail">Correo:</label>
-        <input type="text" id="registerEmail" name="registerEmail" required>
-        <br>
-        <label for="registerPassword">Contraseña:</label>
-        <input type="password" id="registerPassword" name="registerPassword" required>
-        <br>
-        <input type="submit" value="Registrarse">
-    </form>
-
+    <h1>Lista de Usuarios</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha de Creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->created_at }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
     </body>
 </html>
